@@ -1,2 +1,2 @@
-I know my music library a little bit too well...
-![image](https://user-images.githubusercontent.com/76593873/199450475-b28d3081-4786-47eb-bab2-6f14c70cf8d6.png)
+How well do you know your music library? Guess which song is playing, with start time randomized
+![image](https://user-images.githubusercontent.com/76593873/199513664-181cd3ff-b891-4cde-9331-bc58cf3a3121.png)
