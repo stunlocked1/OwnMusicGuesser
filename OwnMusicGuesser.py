@@ -63,20 +63,20 @@ def big_chungus(what):
             sound.play()
             start = time.time()
         elif what==chosen:
-            lastguess = tk.Label(text='Last guess:\n' + str(round((time.time()-start),2)))
+            lastguess = tk.Label(text='Last guess:\n' + str(round((time.time()-start),2)) +' s')
             lastguess.grid(row=4, column=1, sticky='we')
             avgtime.append(time.time()-start)
             averagestuff=sum(avgtime)/len(avgtime)
-            scoreavg = tk.Label(text='Average guess time:\n' + str(round(averagestuff,2)))
+            scoreavg = tk.Label(text='Average guess time:\n' + str(round(averagestuff,2)) +' s')
             scoreavg.grid(row=5, column=1, sticky='we')
             currectnscore=(fcount**0.5)*((win+1)/((lplusratio+1)))*(1/averagestuff**2)*((int(amount.get())/4)**2)
             finalscocurrectnscorered=tk.Label(text='Current score:\n' + str(round(currectnscore)))
             finalscocurrectnscorered.grid(row=6, column=1, sticky='we')
             finalscore=max(finalscore,currectnscore)
-            finalscored=tk.Label(text='Maximum score:\n' + str(round(finalscore)))
+            finalscored=tk.Label(text='Current maximum score:\n' + str(round(finalscore)), bg='LightBlue1', font=("Arial 10 bold"))
             finalscored.grid(row=7, column=1, sticky='we')
             maxscore=max(float(finalscore),float(maxscore))
-            finalsmaxscorecored=tk.Label(text='Maximum score:\n' + str(round(float(maxscore))))
+            finalsmaxscorecored=tk.Label(text='Top score:\n' + str(round(float(maxscore))))
             finalsmaxscorecored.grid(row=100, column=1, sticky='we')
             score.grid_remove()
             win+=1
@@ -146,7 +146,7 @@ try:
 except: 
     maxscore=0
     finalscore=0
-fifafofufe=tk.Label(text='Max score:\n' + str(int(max(float(maxscore), float(finalscore)))))
+fifafofufe=tk.Label(text='Top score:\n' + str(int(max(float(maxscore), float(finalscore)))))
 fifafofufe.grid(row=100, column=1, sticky='we')
 
 window.mainloop()
