@@ -1,0 +1,89 @@
+#converter
+import random, os, vlc, ffmpeg
+def big_chungus(what):
+    if what==0 or what==1:
+        # eject the sussy amongus from impostor
+        if folder=='':
+            import sys as sus
+            sus.exit()
+        # creates a list of SONGS
+        global songs
+        songs=['']*int(amount.get())
+        a=0
+        b=0
+        for i in range(int(amount.get())):
+            while not (songs[i].lower().endswith('mp3') or a>100):
+                songs[i]=random.choice(os.listdir(folder))
+                a+=1
+                while not ((songs[i] in songs[:i]+songs[i+1:]) or b>100): 
+                    songs[i]=random.choice(os.listdir(folder))
+                    b+=1
+        print(songs)
+        global chosen
+        chosen=random.choice(songs)
+        big_chungus(2)
+    else:
+        choice=[tk.Button]*int(amount.get())
+        for i in range(int(amount.get())):
+            choice[i] = tk.Button(text=songs[i],command=lambda x=songs[i]: big_chungus(x))
+            choice[i].grid(row=i+3, column=0, sticky="we")
+        print(choice)
+        print(what)
+        print(chosen)
+        if what==2:
+            print (folder+'/'+chosen)
+            print(ffmpeg.probe(folder+'/'+chosen)['format']['duration'])
+            global sound
+            sound = vlc.MediaPlayer()
+            amongus=vlc.Media(folder+'/'+chosen)
+            amongus.add_option('start-time='+str(random.randrange(int(float((ffmpeg.probe(folder+'/'+chosen)['format']['duration'])))-20)))
+            sound.set_media(amongus)
+            sound.play()
+        elif what==chosen:
+            sound.stop()
+            print('thats right!!!') 
+            for i in range(int(amount.get())):
+                choice[i].grid_remove()
+            big_chungus(1)
+
+
+
+#ask for  afolder 
+def folderget():
+    a=0
+    global folder
+    folder=  tk.filedialog.askdirectory ()
+    foldertext = tk.Label(text=folder)
+    foldertext.grid(row=1, column=1, sticky="ew") #nasty stuff
+    a=1
+
+    #start the epic gaming
+    start = tk.Button(
+        text="Begin",
+        command=lambda: big_chungus(0)
+    )
+    start.grid(row=5, column=0, sticky="w")
+
+import tkinter.filedialog
+import tkinter as tk
+window=tk.Tk()
+
+
+#ask for flder 
+title = tk.Label(text="Music Guesser")
+title.grid(row=0, column=0)
+
+folderbutton = tk.Button(
+    text="Select folder",
+    command=folderget
+)
+folderbutton.grid(row=1, column=0, sticky="we")
+
+#amount of sonsgs
+amount = tk.Entry()
+amount.insert(0, "4")
+amount.grid(row=2, column=0, sticky="w")
+title = tk.Label(text="How many songs to guess from")
+title.grid(row=2, column=1, sticky="w")
+
+window.mainloop()
