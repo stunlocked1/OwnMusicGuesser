@@ -8,10 +8,10 @@ maxscore=savegaming.read()
 savegaming.close()
 
 win,lplusratio,winstreakmax =0,0,0
-idkman2021,start,avgtime,fcount,finalscore,averagestuff,winstreak,keepmalding=0,0,[],0,0,0,0,0
+idkman2021,start,avgtime,fcount,finalscore,averagestuff,winstreak,keepmalding,L,mold,moldy=0,0,[],0,0,0,0,0,False,[],0
 import random, os, vlc, ffmpeg, time
 def big_chungus(what):
-    global sound, idkman2021, win, lplusratio, start,avgtime, fcount,finalscore, maxscore,averagestuff, winstreak,winstreakmax,keepmalding
+    global sound, idkman2021, win, lplusratio, start,avgtime, fcount,finalscore, L,maxscore,averagestuff, winstreak,winstreakmax,keepmalding,mold,moldy
     if what==0 or what==1:
         if what==0:
             if fcount<=int(amount.get()): keepmalding=fcount
@@ -31,7 +31,7 @@ def big_chungus(what):
             bababooey.grid(row=3, column=9, sticky='w')
             finalscocurrectnscorered=tk.Label(text='0       \n0     ', justify='left')
             finalscocurrectnscorered.grid(row=4, column=10, sticky='w')
-            score = tk.Label(text=str(win)+'        \n'+str(lplusratio)+'       ', justify='left')
+            score = tk.Label(text='0        \n0       ', justify='left')
             score.grid(row=1, column=10, sticky='w')
             stunlock = tk.Label(text='0     \n0     ', justify='left')
             stunlock.grid(row=3, column=10, sticky='w')
@@ -90,13 +90,18 @@ def big_chungus(what):
             win+=1
             #lastguess = tk.Label(text='Last guess:\n' + str(round((time.time()-start),2)) +' s')
             #lastguess.grid(row=2, column=9, sticky='we')
-            avgtime.append(time.time()-start)
-            averagestuff=sum(avgtime)/len(avgtime)
+            if L==False: 
+                avgtime.append(time.time()-start)
+                mold.append(time.time()-start)
+            else: mold=[]
+            L=False
+            averagestuff=sum(avgtime)/max(len(avgtime),1)
+            moldy=sum(mold)/max(len(mold),1)
             #scoreavg = tk.Label(text='Average guess time:\n' + str(round(averagestuff,2)) +' s')
             #scoreavg.grid(row=3, column=9, sticky='we')
             winstreak+=1
             winstreakmax=max(winstreak, winstreakmax)
-            currectnscore=max((fcount**0.5)*(win/((lplusratio+1)))*(1/max(averagestuff**2, 1))*((int(keepmalding)/4)**2), (fcount**0.5)*winstreak*(1/max(averagestuff**2, 1))*((int(keepmalding)/4)**2))
+            currectnscore=max((fcount**0.5)*(win/((lplusratio+1)))*(1/max(moldy**2, 1))*((int(keepmalding)/4)**2), (fcount**0.5)*winstreak*(1/max(moldy**2, 1))*((int(keepmalding)/4)**2))
             #finalscocurrectnscorered=tk.Label(text='Current score:\n' + str(round(currectnscore)))
             #finalscocurrectnscorered.grid(row=4, column=9, sticky='we')
             finalscore=max(finalscore,currectnscore)
@@ -128,11 +133,12 @@ def big_chungus(what):
             winstreak=0
             score = tk.Label(text=str(win)+'\n'+str(lplusratio), justify='left')
             score.grid(row=1, column=10, sticky='w')
-            currectnscore=max((fcount**0.5)*(win/((lplusratio+1)))*(1/max(averagestuff**2, 1))*((int(keepmalding)/4)**2), (fcount**0.5)*winstreak*(1/max(averagestuff**2, 1))*((int(keepmalding)/4)**2))
+            currectnscore=max((fcount**0.5)*(win/((lplusratio+1)))*(1/max(moldy**2, 1))*((int(keepmalding)/4)**2), (fcount**0.5)*winstreak*(1/max(moldy**2, 1))*((int(keepmalding)/4)**2))
             finalscocurrectnscorered=tk.Label(text=str(round(currectnscore))+'\n'+str(round(finalscore)), justify='left')
             finalscocurrectnscorered.grid(row=4, column=10, sticky='w')
             stunlock = tk.Label(text=str(winstreak)+'\n'+str(winstreakmax), justify='left')
             stunlock.grid(row=3, column=10, sticky='w')
+            L=True
 
 
 
@@ -178,7 +184,7 @@ folderbutton.grid(row=1, column=0, columnspan=9, sticky="we", pady=5, padx=10)
 
 #amount of sonsgs
 amount = tk.Entry()
-amount.insert(0, "4")
+amount.insert(0, "5")
 amount.grid(row=2, column=0, sticky="we", pady=5, padx=10, columnspan=9)
 title = tk.Label(text="Difficulty")
 title.grid(row=2, column=9, sticky="w")
