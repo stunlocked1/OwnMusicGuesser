@@ -8,15 +8,16 @@ maxscore=savegaming.read()
 savegaming.close()
 
 win,lplusratio,winstreakmax =0,0,0
-idkman2021,start,avgtime,fcount,finalscore,averagestuff,winstreak,keepmalding,L,mold,moldy=0,0,[],0,0,0,0,0,False,[],0
-import random, os, vlc, ffmpeg, time
+idkman2021,start,avgtime,fcount,finalscore,averagestuff,winstreak,keepmalding,L,mold,moldy,ablibibabium=0,0,[],0,0,0,0,0,False,[],0,0
+import random, os, vlc, ffmpeg, time, math
 def big_chungus(what):
-    global sound, idkman2021, win, lplusratio, start,avgtime, fcount,finalscore, L,maxscore,averagestuff, winstreak,winstreakmax,keepmalding,mold,moldy
+    global sound, idkman2021, win, lplusratio, start,avgtime, fcount,finalscore, L,maxscore,averagestuff, winstreak,winstreakmax,keepmalding,mold,moldy,ablibibabium
     if what==0 or what==1:
         if what==0:
             if fcount<=int(amount.get()): keepmalding=fcount
             else: keepmalding=int(amount.get())
-            window.columnconfigure([0,1,2,3,4,5,6,7,8], minsize=100)
+            ablibibabium=math.ceil(float(keepmalding)/10)
+            window.columnconfigure([0,1,2,3,4,5,6,7,8], minsize=int(100/ablibibabium))
             amount.grid_remove()
             title.grid_remove()
             folderbutton.grid_remove()
@@ -44,7 +45,7 @@ def big_chungus(what):
                 win,lplusratio,avgtime,finalscore=0,0,[],0
                 lastguess=tk.Label(text='               \n              ', justify='left')
                 lastguess.grid(row=2, column=10, sticky='w')
-            for i in range(int(keepmalding)+3):window.rowconfigure(i, minsize=50, pad=2)
+            for i in range(min(int(keepmalding),10)):window.rowconfigure(i, minsize=50, pad=2)
         # creates a list of SONGS
         global songs
         songs=['']*int(keepmalding)
@@ -71,9 +72,9 @@ def big_chungus(what):
         idkman2021=1
         choice=[tk.Button]*int(keepmalding)
         for i in range(int(keepmalding)):
-            if len(songs[i])>120: choice[i] = tk.Button(text=songs[i][:120],command=lambda x=songs[i]: big_chungus(x), bg='grey90')
+            if len(songs[i])>(120-ablibibabium*4)/ablibibabium: choice[i] = tk.Button(text=songs[i][:int((120-ablibibabium*4)/ablibibabium)],command=lambda x=songs[i]: big_chungus(x), bg='grey90')
             else: choice[i] = tk.Button(text=songs[i],command=lambda x=songs[i]: big_chungus(x), bg='grey90')
-            choice[i].grid(row=i+1, column=0, columnspan=9, sticky="we", padx=10)
+            choice[i].grid(row=(i%10)+1, column=int(9/ablibibabium)*math.floor(i/10), columnspan=int(9/ablibibabium), sticky="we", padx=10)
         #print(choice)
         #print(what)
         #print(chosen)
@@ -101,7 +102,7 @@ def big_chungus(what):
             #scoreavg.grid(row=3, column=9, sticky='we')
             winstreak+=1
             winstreakmax=max(winstreak, winstreakmax)
-            currectnscore=max((fcount**0.5)*(win/((lplusratio+1)))*(1/max(moldy**2, 1))*((int(keepmalding)/4)**2), (fcount**0.5)*winstreak*(1/max(moldy**2, 1))*((int(keepmalding)/4)**2))
+            currectnscore=max((fcount**0.5)*(win/((lplusratio+1)))*(1/max(moldy**2, 1))*((int(keepmalding)/2)**1.4), (fcount**0.5)*winstreak*(1/max(moldy**2, 1))*((int(keepmalding)/4)**2))
             #finalscocurrectnscorered=tk.Label(text='Current score:\n' + str(round(currectnscore)))
             #finalscocurrectnscorered.grid(row=4, column=9, sticky='we')
             finalscore=max(finalscore,currectnscore)
@@ -109,7 +110,7 @@ def big_chungus(what):
             #finalscored.grid(row=5, column=9, sticky='we')
             maxscore=max(float(finalscore),float(maxscore))
             finalsmaxscorecored=tk.Label(text='Top score:       \n' + str(round(float(maxscore)))+'     ', justify='left')
-            finalsmaxscorecored.grid(row=100, column=9, sticky='w')
+            finalsmaxscorecored.grid(row=20, column=9, sticky='w')
             #qwqq
             lastguess=tk.Label(text=str(round((time.time()-start),2)) +' s      \n'+str(round(averagestuff,2)) +' s     ', justify='left')
             lastguess.grid(row=2, column=10, sticky='w')
@@ -149,7 +150,7 @@ def folderget():
     global folder, fcount
     folder=  tk.filedialog.askdirectory ()
     foldertext = tk.Label(text=folder +' - ')
-    foldertext.grid(row=100, column=1, sticky="ew") #nasty stuff
+    foldertext.grid(row=20, column=1, sticky="ew") #nasty stuff
     a=1
 
     #start the epic gaming
@@ -157,10 +158,10 @@ def folderget():
         text="Begin",
         command=lambda: big_chungus(0)
     )
-    start.grid(row=100, column=0, sticky="w", pady=5, padx=10)
+    start.grid(row=20, column=0, sticky="w", pady=5, padx=10)
     fcount=len([entry for entry in os.listdir(folder) if (os.path.isfile(os.path.join(folder, entry)) and entry.lower().endswith(('.mp3','.wav', '.flac', '.aac', '.ogg', '.wma', '.pcm', '.aiff', '.alac', '.dsd')))])
     count = tk.Label(text=str(fcount)+' songs')
-    count.grid(row=100, column=2, sticky='we')
+    count.grid(row=20, column=2, sticky='we')
 
 import tkinter.filedialog
 from tkinter import ttk
@@ -195,7 +196,7 @@ except:
     maxscore=0
     finalscore=0
 fifafofufe=tk.Label(text='Top score:\n' + str(int(max(float(maxscore), float(finalscore)))))
-fifafofufe.grid(row=100, column=9, sticky='we')
+fifafofufe.grid(row=20, column=9, sticky='we')
 
 window.mainloop()
 savegaming = open('OwnMusicGuesser.txt', 'w+')
