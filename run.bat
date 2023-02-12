@@ -1,1 +1,0 @@
-cmd /c "py -m OwnMusicGuesser.py"
