@@ -6,4 +6,4 @@ How well do you know your music library? Guess which song is playing, with start
 
 enjoy mold user interface but its made with tkinker or whatever, dont dm me about malding if you survive stunlock after viewing the source code.
 
-NOTE TO WHOEVER IS REVIEWING THE CODE IT IS SATIRE THANK YOU FOR UNDERSTANDING AND NOT BEING ASSUMPTIOUS
+note: this was coded by gort and quandale Dingle. they just Told me to put it There.
