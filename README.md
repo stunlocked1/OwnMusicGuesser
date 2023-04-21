@@ -4,4 +4,6 @@ How well do you know your music library? Guess which song is playing, with start
 ![image](https://user-images.githubusercontent.com/76593873/218307760-c46d385a-5bd0-47e2-814d-4077cdd5df45.png)
 
 
-enjoy mold user interface but its made with tkinker or whatever, dont dm me about malding if you survive stunlock after viewing the source code
+enjoy mold user interface but its made with tkinker or whatever, dont dm me about malding if you survive stunlock after viewing the source code.
+
+NOTE TO WHOEVER IS REVIEWING THE CODE IT IS SATIRE THANK YOU FOR UNDERSTANDING AND NOT BEING ASSUMPTIOUS
